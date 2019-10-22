@@ -1,0 +1,67 @@
+<div id="users-table" stTable #table="stTable">
+  <div *ngIf="table.busy" class="loading-indicator">Loading ...</div>
+	<div>
+		<label>
+      <span>Search:</span>
+      <input type="search" placeholder="Case sensitive search on first name, last name and job" stSearch="name.first, name.last, job" />
+    </label>
+		<label>
+      <span>First name:</span>
+      <input placeholder="ex: laurent" type="text" stFilter="name.first" />
+    </label>
+		<label>
+      <span>Last name:</span>
+      <input placeholder="ex: renard" type="text" stFilter="name.last" />
+    </label>
+		<label>
+      <span>Born after:</span>
+      <input type="date" stFilterOperator="gt" stFilterType="date" stFilter="birthDate" />
+    </label>
+		<label>
+      <span>Filter by job type:</span>
+      <select name="job" stFilter="job" stFilterOperator="is">
+        <option value="">-</option>
+        <option value="dev">DEV</option>
+        <option value="manager">MANAGER</option>
+        <option value="qa">QA</option>
+      </select>
+    </label>
+		<label>
+      <span>Balance lower than:</span>
+      <input type="number" placeholder="ex: 2000" stFilterOperator="lt" stFilterType="number" stFilter="balance" />
+    </label>
+	</div>
+	<table>
+		<thead>
+			<tr>
+				<th stSort="name.first" stSortCycle="true">First name</th>
+				<th stSort="name.last">Last name</th>
+				<th stSort="birthDate">Birth date</th>
+				<th stSort="job">Job</th>
+				<th stSort="balance">Balance</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let user of table.items">
+				<td>{{user.value.name.first}}</td>
+				<td>{{user.value.name.last | uppercase}}</td>
+				<td>{{user.value.birthDate | date}}</td>
+				<td>{{user.value.job | uppercase}}</td>
+				<td>{{user.value.balance | currency}}
+			</tr>
+		</tbody>
+	</table>
+	<div stPagination #pager="stPagination">
+		<div>
+			<p>Showing items <em>{{pager.length > 0 ? pager.lowerBoundIndex + 1 : 0}}</em> - <em>{{pager.higherBoundIndex +
+          1}}</em> of <em>{{pager.length}} </em> items
+			</p>
+		</div>
+		<div>
+			<div>
+				<button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()">Previous</button>
+				<button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()">Next</button>
+			</div>
+		</div>
+	</div>
+</div>
