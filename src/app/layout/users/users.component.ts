@@ -13,7 +13,7 @@ const providers = [{
 }];
 
 @Component({
-  selector: 'user-list',
+  selector: 'app-users',
   templateUrl: './users.component.html',
   providers
 })

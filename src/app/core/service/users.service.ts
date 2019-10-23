@@ -24,12 +24,10 @@ const wait = (time = 2000) => new Promise(resolve => {
   providedIn: 'root',
 })
 export class UsersService {
-
   private _db = table({ data: data });
 
   async queryUsers(tableState: TableState): Promise<ServerResult> {
-
-console.log('SERVER CALL');
+    console.log('SERVER CALL');
     // all matching - without slicing the data set (to get summmary info)
     const fullListState = Object.assign({}, tableState, { slice: { page: 1 } });
     const allMatching = await this._db.eval(fullListState);
@@ -45,9 +43,6 @@ console.log('SERVER CALL');
 
     // match the exact query to get the data with the slice
     const matching = await this._db.eval(tableState);
-    return {
-      data: matching,
-      summary
-    };
+    return { data: matching, summary };
   }
 }
