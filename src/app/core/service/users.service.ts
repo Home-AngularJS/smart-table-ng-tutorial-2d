@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { users, User } from './users';
+import { data, User } from './data';
 import { of, Observable } from 'rxjs/index';
 import { delay } from 'rxjs/operators';
 import { TableState, DisplayedItem } from 'smart-table-ng';
@@ -25,7 +25,7 @@ const wait = (time = 2000) => new Promise(resolve => {
 })
 export class UsersService {
 
-  private _db = table({ data: users });
+  private _db = table({ data: data });
 
   async queryUsers(tableState: TableState): Promise<ServerResult> {
 
