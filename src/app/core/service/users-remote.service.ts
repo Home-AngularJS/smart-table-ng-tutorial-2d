@@ -4,8 +4,6 @@ import { of, Observable } from 'rxjs/index';
 import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import { LessonsDataSource } from "./lessons.datasource";
-import { LessonsService } from "./lessons.service";
 import { UsersDataSource } from "./users.datasource";
 import { UsersService } from "./users.service";
 
@@ -28,20 +26,13 @@ const wait = (time = 2000) => new Promise(resolve => {
   providedIn: 'root',
 })
 export class UsersRemoteService {
-  // lessonDataSource: LessonsDataSource;
   usersDataSource: UsersDataSource;
-  res;
+  users;
 
-  constructor(
-      // private coursesService: LessonsService,
-      private usersService: UsersService
-  ) {}
+  constructor(private usersService: UsersService) {}
 
   async queryUsers(tableState: TableState) {
     console.log( JSON.stringify(tableState) )
-
-    // this.lessonDataSource = new LessonsDataSource(this.coursesService);
-    // this.lessonDataSource.loadLessons(1, '', 'asc', 0, 3);
 
     this.usersDataSource = new UsersDataSource(this.usersService);
     this.usersDataSource.loadUsers('', tableState.sort.direction, tableState.slice.page-1, 10);
@@ -54,10 +45,11 @@ export class UsersRemoteService {
         })
       }
       const summary: Summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: 33 } // const summary: Summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: next.length }
-      this.res = { data: data, summary };
+      this.users = { data: data, summary };
     });
     await wait(Math.floor(Math.random() * 1000));
 
-    return this.res;
+    // console.log( JSON.stringify(this.users) )
+    return this.users;
   }
 }
