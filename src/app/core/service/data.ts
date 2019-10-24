@@ -10,6 +10,7 @@ export enum Job {
 }
 
 export interface User {
+  id: number;
   name: Name;
   job: Job;
   birthDate: Date;
@@ -23,6 +24,7 @@ const jobs = [Job.DEV, Job.QA, Job.MANAGER]
 export const data: User[] = [];
 for (let i = 0; i < 33; i++) {
   data.push({
+    id: i,
     name: {
       first: firstNames[Math.floor(Math.random() * 20)],
       last: lastNames[Math.floor(Math.random() * 20)]
