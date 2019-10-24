@@ -21,7 +21,7 @@ const lastNames = ['Renard', 'Dupraz', 'Dupont', 'Leponge', 'Robin', 'Blasec', '
 const jobs = [Job.DEV, Job.QA, Job.MANAGER]
 
 export const data: User[] = [];
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 33; i++) {
   data.push({
     name: {
       first: firstNames[Math.floor(Math.random() * 20)],

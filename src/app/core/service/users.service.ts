@@ -29,8 +29,10 @@ export class UsersService {
   async queryUsers(tableState: TableState): Promise<ServerResult> {
     console.log('SERVER CALL');
     // all matching - without slicing the data set (to get summmary info)
-    const fullListState = Object.assign({}, tableState, { slice: { page: 1 } });
+    const fullListState = Object.assign({}, tableState, { slice: { page: 1 } }); //TODO:  use default-settings service
     const allMatching = await this._db.eval(fullListState);
+    // console.log(allMatching)
+    console.log( JSON.stringify(allMatching) )
 
     const summary: Summary = {
       page: tableState.slice.page,
