@@ -23,7 +23,7 @@ const wait = (time = 2000) => new Promise(resolve => {
 @Injectable({
   providedIn: 'root',
 })
-export class UsersLocalService {
+export class UsersLocaleService {
 
   async queryUsers(tableState: TableState): Promise<ServerResult> {
     console.log('SERVER CALL');
