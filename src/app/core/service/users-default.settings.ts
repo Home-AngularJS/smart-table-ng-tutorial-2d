@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 @Injectable({
   providedIn: 'root'
 })
-export class DefaultSettingsService {
+export class UsersDefaultSettings {
   search = {};
 
   slice = { page: 1, size: 10 };

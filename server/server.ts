@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { Application } from 'express';
-import { searchUsers } from "./search-users.route";
+import { searchUsers } from "./users.route";
 
 const app: Application = express();
 
