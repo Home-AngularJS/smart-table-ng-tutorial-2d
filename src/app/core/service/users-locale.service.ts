@@ -45,7 +45,7 @@ export class UsersLocaleService {
     console.log( JSON.stringify(summary) )
 
     //wait a little bit to fake server latency
-    // await wait(Math.floor(Math.random() * 3000));
+    await wait(Math.floor(Math.random() * 3000));
 
     // match the exact query to get the data with the slice
     const matching = await _db.eval(tableState); //TODO: получаем уже постранично данные в (локальный) ответ

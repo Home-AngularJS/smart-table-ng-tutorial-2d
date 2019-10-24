@@ -3,6 +3,8 @@ import { USERS } from './db-data';
 import { setTimeout } from 'timers';
 
 export function searchUsers(req: Request, res: Response) {
+    res.setHeader('Access-Control-Allow-Origin', '*'); //TODO:  https://wanago.io/2018/11/05/cors-cross-origin-resource-sharing
+
     const queryParams = req.query;
     console.log( queryParams ) // console.log( JSON.stringify(queryParams) )
     /* receive request query params */
@@ -35,8 +37,10 @@ export function searchUsers(req: Request, res: Response) {
     const initialPos = pageNumber * pageSize;
     const usersPage = users.slice(initialPos, initialPos + pageSize);
     console.log( usersPage )
-    setTimeout(() => {
-        res.status(200)
-            .json({ payload: usersPage });
-    },1000);
+    // setTimeout(() => {
+    //     res.status(200)
+    //         .json({ payload: usersPage });
+    // },1000);
+    res.status(200)
+        .json({ payload: usersPage });
 }

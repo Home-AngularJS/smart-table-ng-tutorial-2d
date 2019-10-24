@@ -38,15 +38,22 @@
 	<table>
 		<thead>
 			<tr>
-				<th stSort="name.first" stSortCycle="true">First name</th>
-				<th stSort="name.last" stSortCycle="true">Last name</th>
-				<th stSort="birthDate" stSortCycle="true">Birth date</th>
-				<th stSort="job" stSortCycle="true">Job</th>
-				<th stSort="balance" stSortCycle="true">Balance</th>
+				<th stSort="id" stSortCycle="true">ID</th>
+<!--				<th stSort="name.first" stSortCycle="true">First name</th>-->
+<!--				<th stSort="name.last" stSortCycle="true">Last name</th>-->
+<!--				<th stSort="birthDate" stSortCycle="true">Birth date</th>-->
+<!--				<th stSort="job" stSortCycle="true">Job</th>-->
+<!--				<th stSort="balance" stSortCycle="true">Balance</th>-->
+				<th>First name</th>
+				<th>Last name</th>
+				<th>Birth date</th>
+				<th>Job</th>
+				<th>Balance</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr *ngFor="let user of table.items">
+				<td>{{user.value.id}}</td>
 				<td>{{user.value.name.first}}</td>
 				<td>{{user.value.name.last | uppercase}}</td>
 				<td>{{user.value.birthDate | date}}</td>

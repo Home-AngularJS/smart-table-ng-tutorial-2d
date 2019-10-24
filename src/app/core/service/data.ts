@@ -1,23 +1,24 @@
 interface Name {
-  last: string;
-  first: string;
+    last: string;
+    first: string;
 }
 
 export enum Job {
-  'DEV' = 'dev',
-  'QA' = 'qa',
-  'MANAGER' = 'manager'
+    'DEV' = 'dev',
+    'QA' = 'qa',
+    'MANAGER' = 'manager'
 }
 
 export interface User {
-  id: number;
-  name: Name;
-  job: Job;
-  birthDate: Date;
-  balance: number;
+    id: number;
+    name: Name;
+    job: Job;
+    birthDate: Date;
+    balance: number;
 }
 
-export const data: User[] = [
+
+export const data = [
     {
         id: 0,
         name: {
