@@ -13,15 +13,15 @@ table {
 }
 
 thead, tbody {
-    border-bottom: 2px solid #006969;
+    border-bottom: 2px solid #00275e;
 }
 
 em{
-  color:orange
+  color:#007bff
 }
 
 tbody {
-    color: #006969;
+    color: #00275e;
 }
 
 tbody tr:not(:last-child) {
@@ -29,7 +29,7 @@ tbody tr:not(:last-child) {
 }
 
 tbody tr:nth-child(2n) {
-    background: #dcefe9;
+    background: rgba(0, 93, 255, 0.18);
 }
 
 th, td {
@@ -52,7 +52,7 @@ button {
     font: inherit;
     padding: 0.3em 0.5em;
     background: inherit;
-    color: #006969;
+    color: #00275e;
     border: 1px solid currentColor;
     min-width: 5em;
     transition: all 0.3s;
@@ -60,7 +60,7 @@ button {
 }
 
 button:not(:disabled):hover {
-    background: #006969;
+    background: #00275e;
     color: white;
     cursor: pointer;
 }
@@ -83,16 +83,16 @@ input, select {
     flex-grow: 1;
     font: inherit;
     font-weight: lighter;
-    border: 1px solid #dcefe9;
+    border: 1px solid rgba(132, 130, 255, 0.3);
     padding: 0.2em 0.5em;
     margin: 0 0.5em;
-    color: #006969;
+    color: #00275e;
     outline: none;
 }
 
 input:focus, select:focus {
-    border-color: #006969;
-    box-shadow: 0 0 4px 0 #006969;
+    border-color: #00275e;
+    box-shadow: 0 0 4px 0 #00275e;
 }
 
 .st-sort-asc:before {
