@@ -1,23 +1,57 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { User } from "../model/user";
+import { of, Observable } from 'rxjs/index';
+import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
+import { merge, fromEvent } from 'rxjs';
+import { TableState, DisplayedItem } from 'smart-table-ng';
+import { User } from '../model/user';
+import { UsersRest } from "./users.rest";
+import { UsersDataSource } from "./users.datasource";
 
-@Injectable()
+interface Summary {
+  page: number;
+  size: number;
+  filteredCount: number;
+}
+
+interface ServerResult {
+  data: DisplayedItem<User>[];
+  summary: Summary
+}
+
+const wait = (time = 2000) => new Promise(resolve => {
+  setTimeout(() => resolve(), time);
+});
+
+@Injectable({
+  providedIn: 'root',
+})
 export class UsersService {
-    constructor(private http: HttpClient) {}
+  usersDataSource: UsersDataSource;
+  users: ServerResult;
 
-    findUsers(
-        filter = '', sortOrder = 'asc', pageNumber = 0, pageSize = 10):  Observable<User[]> {
-            return this.http.get('http://localhost:9000/api/users', {
-                params: new HttpParams()
-                    .set('filter', filter)
-                    .set('sortOrder', sortOrder)
-                    .set('pageNumber', pageNumber.toString())
-                    .set('pageSize', pageSize.toString())
-                }).pipe(
-                    map(res =>  res['payload'])
-                );
+  constructor(private usersRest: UsersRest) {}
+
+  async queryUsers(tableState: TableState) {
+    console.log( JSON.stringify(tableState) )
+
+    this.usersDataSource = new UsersDataSource(this.usersRest);
+    this.usersDataSource.loadUsers('', tableState.sort.direction, tableState.slice.page-1, 10);
+    this.usersDataSource.usersSubject.subscribe(data => {
+      var _data = [];
+      for (let i = 0; i < data.length; i++) {
+          _data.push({
+          'index': i,
+          'value': data[i]
+        })
       }
+      this.users = {
+          data: _data,
+          summary: { page: tableState.slice.page, size: tableState.slice.size, filteredCount: 33 } // { page: tableState.slice.page, size: tableState.slice.size, filteredCount: next.length }
+      };
+    });
+    await wait(Math.floor(Math.random() * 1000));
+
+    // console.log( JSON.stringify(this.users) )
+    return this.users;
+  }
 }

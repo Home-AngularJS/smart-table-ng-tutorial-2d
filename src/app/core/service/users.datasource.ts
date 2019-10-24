@@ -2,14 +2,13 @@ import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { User } from "../model/user";
-import { UsersService } from "./users.service";
+import { UsersRest } from "./users.rest";
 
 export class UsersDataSource implements DataSource<User> {
     public usersSubject = new BehaviorSubject<User[]>([]);
     private loadingSubject = new BehaviorSubject<boolean>(false);
-    public loading$ = this.loadingSubject.asObservable();
 
-    constructor(private usersService: UsersService) {}
+    constructor(private usersRest: UsersRest) {}
 
     loadUsers(filter: string,
               sortDirection: string,
@@ -17,7 +16,7 @@ export class UsersDataSource implements DataSource<User> {
               pageSize: number) {
         this.loadingSubject.next(true);
 
-        this.usersService.findUsers(filter, sortDirection, pageIndex, pageSize)
+        this.usersRest.findUsers(filter, sortDirection, pageIndex, pageSize)
             .pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false)))

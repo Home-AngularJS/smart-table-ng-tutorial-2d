@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { SmartTable, of, TableState } from 'smart-table-ng';
-import { UsersRemoteService } from "../../core/service/users-remote.service";
-import { DefaultSettingsService } from '../../core/service/default-settings.service';
 import server from 'smart-table-server';
+import { DefaultSettingsService } from '../../core/service/default-settings.service';
+import { UsersService } from "../../core/service/users.service";
 
 const providers = [{
   provide: SmartTable,
-  useFactory: (Users: UsersRemoteService, settings: TableState) => of([], settings, server({
-    query: (tableState) => Users.queryUsers(tableState)
+  useFactory: (usersService: UsersService, settings: TableState) => of([], settings, server({
+    query: (tableState) => usersService.queryUsers(tableState)
   })),
-  deps: [UsersRemoteService, DefaultSettingsService]
+  deps: [UsersService, DefaultSettingsService]
 }];
 
 @Component({

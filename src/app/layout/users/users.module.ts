@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersComponent } from './users.component';
 import { SmartTableModule } from 'smart-table-ng';
-import { UsersService } from "../../core/service/users.service";
+import { UsersRest } from "../../core/service/users.rest";
 
 @NgModule({
     declarations: [ UsersComponent ],
@@ -13,7 +13,7 @@ import { UsersService } from "../../core/service/users.service";
         HttpClientModule
     ],
     providers: [
-        UsersService
+        UsersRest
     ],
     exports: [ UsersComponent ]
 })
