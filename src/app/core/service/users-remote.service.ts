@@ -38,15 +38,13 @@ export class UsersRemoteService {
   ) {}
 
   async queryUsers(tableState: TableState) {
-    console.log('SERVER CALL');
     console.log( JSON.stringify(tableState) )
 
     // this.lessonDataSource = new LessonsDataSource(this.coursesService);
     // this.lessonDataSource.loadLessons(1, '', 'asc', 0, 3);
+
     this.usersDataSource = new UsersDataSource(this.usersService);
-
     this.usersDataSource.loadUsers('', tableState.sort.direction, tableState.slice.page-1, 10);
-
     this.usersDataSource.usersSubject.subscribe(next => {
       var data = [];
       for (let i = 0; i < next.length; i++) {
@@ -55,12 +53,9 @@ export class UsersRemoteService {
           'value': next[i]
         })
       }
-      // const summary: Summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: next.length }
-      const summary: Summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: 33 }
+      const summary: Summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: 33 } // const summary: Summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: next.length }
       this.res = { data: data, summary };
-      console.log( JSON.stringify(this.res) )
     });
-
     await wait(Math.floor(Math.random() * 1000));
 
     return this.res;

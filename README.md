@@ -13,6 +13,10 @@ For our use case we may need smart-table-server extension.
 
 [Smart Table](https://lorenzofox3.github.io/smart-table-website)
 
+```text
+npm run server
+```
+
 * http://localhost:4200/courses/1
   * http://localhost:4200/api/lessons?courseId=1&filter=&sortOrder=asc&pageNumber=1&pageSize=3
 
