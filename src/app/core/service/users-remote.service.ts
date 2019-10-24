@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from './data';
+import { User } from '../model/user';
 import { of, Observable } from 'rxjs/index';
 import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
 import { merge, fromEvent } from 'rxjs';
