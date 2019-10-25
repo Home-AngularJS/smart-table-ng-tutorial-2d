@@ -42,7 +42,6 @@ export class UsersService {
       let filter: any = dtoToFilterUser(tableState.filter)
       console.log(filter);
 
-    // this.usersDataSource.loadUsers( '', tableState.sort.direction, tableState.slice.page-1, 10);
     this.usersDataSource.loadUsers( JSON.stringify(filter), tableState.sort.direction, tableState.slice.page-1, 10);
     this.usersDataSource.usersSubject.subscribe(data => {
       var _data = [];
