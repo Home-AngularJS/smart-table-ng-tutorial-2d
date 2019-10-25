@@ -1,11 +1,11 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
-import { User } from "../model/user";
+import { UsersModel } from "../model/users.model";
 import { UsersRest } from "./users.rest";
 
-export class UsersDataSource implements DataSource<User> {
-    public usersSubject = new BehaviorSubject<User[]>([]);
+export class UsersDataSource implements DataSource<UsersModel> {
+    public usersSubject = new BehaviorSubject<UsersModel[]>([]);
     private loadingSubject = new BehaviorSubject<boolean>(false);
 
     constructor(private usersRest: UsersRest) {}
@@ -23,7 +23,7 @@ export class UsersDataSource implements DataSource<User> {
             .subscribe(users => this.usersSubject.next(users));
     }
 
-    connect(collectionViewer: CollectionViewer): Observable<User[]> {
+    connect(collectionViewer: CollectionViewer): Observable<UsersModel[]> {
         console.log("Connecting data source");
         return this.usersSubject.asObservable();
     }

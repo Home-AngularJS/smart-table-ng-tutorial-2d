@@ -3,7 +3,7 @@ import { of, Observable } from 'rxjs/index';
 import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import {dtoToFilterUser, User} from '../model/user';
+import {dtoToFilterUser, UsersModel} from '../model/users.model';
 import { UsersRest } from "./users.rest";
 import { UsersDataSource } from "./users.datasource";
 
@@ -14,7 +14,7 @@ interface Summary {
 }
 
 interface ServerResult {
-  data: DisplayedItem<User>[];
+  data: DisplayedItem<UsersModel>[];
   summary: Summary
 }
 

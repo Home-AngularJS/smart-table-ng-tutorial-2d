@@ -9,7 +9,7 @@ export enum Job {
     'MANAGER' = 'manager'
 }
 
-export interface User {
+export interface UsersModel {
     id: string;
     name: Name;
     job: Job;
