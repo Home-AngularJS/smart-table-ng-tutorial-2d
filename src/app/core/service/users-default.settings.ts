@@ -9,7 +9,7 @@ export class UsersDefaultSettings {
   slice = { page: 1, size: 10 };
 
   filter = {
-    id: [{ operator: 'lt', type: 'number', value: 2000 }] // name: [{ operator: 'lt', type: 'string', value: 'A' }] // balance: [{ operator: 'lt', type: 'number', value: 2000 }]
+    id: [{ operator: 'lt', type: 'number', value: '' }] // name: [{ operator: 'lt', type: 'string', value: 'A' }] // balance: [{ operator: 'lt', type: 'number', value: 2000 }]
   };
 
   sort = {

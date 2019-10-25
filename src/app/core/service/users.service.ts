@@ -3,7 +3,7 @@ import { of, Observable } from 'rxjs/index';
 import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import { User } from '../model/user';
+import {dtoToFilterUser, User} from '../model/user';
 import { UsersRest } from "./users.rest";
 import { UsersDataSource } from "./users.datasource";
 
@@ -32,10 +32,18 @@ export class UsersService {
   constructor(private usersRest: UsersRest) {}
 
   async queryUsers(tableState: TableState) {
+    const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
     console.log( JSON.stringify(tableState) )
 
     this.usersDataSource = new UsersDataSource(this.usersRest);
-    this.usersDataSource.loadUsers('', tableState.sort.direction, tableState.slice.page-1, 10);
+    // this.usersDataSource.loadUsers(tableState.filter, tableState.sort.direction, tableState.slice.page-1, 10);
+
+
+      let filter: any = dtoToFilterUser(tableState.filter)
+      console.log(filter);
+
+    // this.usersDataSource.loadUsers( '', tableState.sort.direction, tableState.slice.page-1, 10);
+    this.usersDataSource.loadUsers( JSON.stringify(filter), tableState.sort.direction, tableState.slice.page-1, 10);
     this.usersDataSource.usersSubject.subscribe(data => {
       var _data = [];
       for (let i = 0; i < data.length; i++) {

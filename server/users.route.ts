@@ -1,9 +1,14 @@
 import { Request, Response } from 'express';
 import { USERS } from './db-data';
+import { filterToUser } from "./user";
 
 export function searchUsers(req: Request, res: Response) {
     const queryParams = req.query;
+    const filterUser = filterToUser(queryParams.filter);
+
     console.log( queryParams ) // console.log( JSON.stringify(queryParams) )
+    console.log( filterUser )
+
     /* receive request query params */
     const filter = queryParams.filter || '',
           sortOrder = queryParams.sortOrder,
@@ -12,16 +17,28 @@ export function searchUsers(req: Request, res: Response) {
 
     /* SELECT * FROM db ORDER BY id */
     let users = Object.values(USERS)
-      // .filter(user => user.courseId == courseId)
-      .sort((l1, l2) => l1.id - l2.id);
+        .filter(user => {
+            if (filterUser.id=='' && filterUser.name.first=='' && filterUser.name.last=='' && filterUser.birthDate=='' && filterUser.balance=='' && filterUser.job=='') return true;
+            let countFilter: number = 0;
+            let isFilterCount: number = 0;
+            if (filterUser.id!='') { countFilter++; if (user.id == filterUser.id) isFilterCount++; }
+            if (filterUser.name.first!='') { countFilter++; if (user.name.first == filterUser.name.first) isFilterCount++; }
+            if (filterUser.name.last!='') { countFilter++; if (user.name.last == filterUser.name.last) isFilterCount++; }
+            if (filterUser.birthDate!='') { countFilter++; if (user.birthDate == filterUser.birthDate) isFilterCount++; }
+            if (filterUser.balance!='') { countFilter++; if (user.balance == filterUser.balance) isFilterCount++; }
+            if (filterUser.job!='') { countFilter++; if (user.job == filterUser.job) isFilterCount++; }
+            return 0<countFilter && countFilter==isFilterCount;
+        })
+        .sort((l1, l2) => l1.id - l2.id);
+
     // console.log( users )
 
     /* do filter to records receive db */
     if (filter) {
-        users = users.filter(
-         l => l.name.first.trim()
-           .toLowerCase()
-           .search(filter.toLowerCase()) >= 0);
+        // users = users.filter(
+        //  u => u.name.first.trim()
+        //    .toLowerCase()
+        //    .search(filter.toLowerCase()) >= 0);
     }
     // console.log( users )
 
