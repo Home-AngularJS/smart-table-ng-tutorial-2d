@@ -17,6 +17,8 @@ For our use case we may need smart-table-server extension.
 npm run server
 ```
 
+* http://localhost:9000/api/users?filter=%7B%22id%22:%22%22,%22firstName%22:%22Boris%22,%22lastName%22:%22Robin%22,%22job%22:%22manager%22,%22birthDate%22:%221976-06-23%22,%22balance%22:%224559%22%7D&sortOrder=asc&pageNumber=0&pageSize=10
+
 ---
 
 [Angular Custom Table Component Paging](https://long2know.com/2017/04/angular-custom-table-component-paging)
